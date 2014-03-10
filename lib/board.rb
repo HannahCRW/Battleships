@@ -21,10 +21,17 @@ class Board
 		@player.name
 	end
 
+	def change_to_x(x, y)
+		self.rows[x][y] = "x"
+	end
+
+	def change_to_o(x, y)
+		self.rows[x][y] = "o"
+	end
+
 	def register_shot at_coordinates
-		x = COLUMNS[at_coordinates[0]] #=> 6, which returns G eventually??
-		# 6-5 for index
-		y = at_coordinates[1].to_i - 1 #=> 5
+		x = COLUMNS[at_coordinates[0]]
+		y = at_coordinates[1].to_i - 1
 		if self.rows[x][y] == "s"
 			self.rows[x][y] = "x"
 			return "x"
@@ -32,7 +39,8 @@ class Board
 			self.rows[x][y] = "o"
 			return "o"
 		end
-		# return o if "", return x if "s"
+		# we know this smells
+		# you smell worse
 	end
 
  def rows # creates boards for both player and opponent	
@@ -40,10 +48,6 @@ class Board
  end
 
 	def opponent_view
-		self.rows.each{|row|
-			row.map!{|element|
-				element == "s" ? element = "" : element = element
-			}
-		}
+			self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
 	end
 end
