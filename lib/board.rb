@@ -35,11 +35,11 @@ class Board
 		self.rows[x][y] == "s" ? (change_to_x(x,y); "x") : (change_to_o(x,y); "o")
 	end
 
- def rows # creates boards for both player and opponent	
- 	Array.new(10,  Array.new(10, "") )
- end
+	def rows # creates boards for both player and opponent	
+		Array.new(10,  Array.new(10, "") )
+	end
 
 	def opponent_view
-			self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
+		self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
 	end
 end
