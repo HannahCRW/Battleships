@@ -25,27 +25,27 @@ class Board
 		x = COLUMNS[at_coordinates[0]] #=> 6, which returns G eventually??
 		# 6-5 for index
 		y = at_coordinates[1].to_i - 1 #=> 5
-		if rows"[#{x}][#{y}]" == "s"
-			rows[x][y] = "x"
+		if self.rows[x][y] == "s"
+			self.rows[x][y] = "x"
 			return "x"
 		else
-			rows[x][y] = "o"
+			self.rows[x][y] = "o"
 			return "o"
 		end
 		# return o if "", return x if "s"
 	end
 
-	def rows # creates boards for both player and opponent
-		grid_array = []
-		10.times { 
-			row_array = []
-			10.times {
-				row_array << ""
-			}
-			grid_array << row_array
-		}
-		grid_array
-	end
+ def rows # creates boards for both player and opponent	
+ 	grid_array = []
+ 	10.times { 
+ 		row_array = []
+ 		10.times {
+ 			row_array << ""
+ 		}
+ 		grid_array << row_array
+ 	}
+ 	grid_array
+ end
 
 	def opponent_view
 
