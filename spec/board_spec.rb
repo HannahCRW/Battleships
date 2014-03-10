@@ -17,4 +17,9 @@ describe Board do
 		expect(board.rows.count).to eq(10)
 		expect(board.rows[0].count).to eq(10)
 	end
+
+	it "returns a view of the opponent's board" do
+		test_board = board.rows
+		expect(board.opponent_view).should_not include("s")
+	end
 end
