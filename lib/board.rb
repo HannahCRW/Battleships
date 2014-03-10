@@ -48,6 +48,12 @@ class Board
  end
 
 	def opponent_view
+		# self.rows.gsub('s', "")
+		self.rows.each{|row|
+			row.map!{|element|
+				element == "s" ? element = "" : element = element
+			}
+		}
 
 	end
 end
