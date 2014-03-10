@@ -36,24 +36,14 @@ class Board
 	end
 
  def rows # creates boards for both player and opponent	
- 	grid_array = []
- 	10.times { 
- 		row_array = []
- 		10.times {
- 			row_array << ""
- 		}
- 		grid_array << row_array
- 	}
- 	grid_array
+ 	Array.new(10,  Array.new(10, "") )
  end
 
 	def opponent_view
-		# self.rows.gsub('s', "")
 		self.rows.each{|row|
 			row.map!{|element|
 				element == "s" ? element = "" : element = element
 			}
 		}
-
 	end
 end
