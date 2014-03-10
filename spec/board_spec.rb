@@ -4,6 +4,11 @@ require_relative "../lib/player"
 describe Board do
 	let(:player) { double :player, {:name => "Khush"} }
 	let(:board) { Board.new player}
+
+	def test_board
+		test_board = [[[],[],["s"]],[["s"],[],["s"]],[[],[],["s"]]]
+	end
+
 	it "can set a player" do
 		# player = double :player, {:name => "Khush"}
 		expect(board.owner).to eq("Khush")
