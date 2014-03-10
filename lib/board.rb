@@ -29,6 +29,15 @@ class Board
 	end
 
 	def rows
+		grid_array = []
+		10.times { 
+			row_array = []
+			10.times {
+				row_array << ""
+			}
+			grid_array << row_array
+		}
+		grid_array
 	end
 
 	def opponent_view
