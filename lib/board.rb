@@ -32,15 +32,7 @@ class Board
 	def register_shot at_coordinates
 		x = COLUMNS[at_coordinates[0]]
 		y = at_coordinates[1].to_i - 1
-		if self.rows[x][y] == "s"
-			self.rows[x][y] = "x"
-			return "x"
-		else
-			self.rows[x][y] = "o"
-			return "o"
-		end
-		# we know this smells
-		# you smell worse
+		self.rows[x][y] == "s" ? (change_to_x(x,y); "x") : (change_to_o(x,y); "o")
 	end
 
  def rows # creates boards for both player and opponent	
