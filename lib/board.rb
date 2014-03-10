@@ -22,7 +22,10 @@ class Board
 	end
 
 	def register_shot at_coordinates
-		# "[6][5]"
+		x = COLUMNS[at_coordinates[0]] #=> 6, which returns G eventually??
+		# 6-5 for index
+		y = at_coordinates[1].to_i - 1 #=> 5
+		"[#{x}][#{y}]"
 	end
 
 	def rows
