@@ -8,6 +8,7 @@ class Board
 	end
 
 	def register_shot at_coordinates
+		# "[6][5]"
 	end
 
 	def rows
