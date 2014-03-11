@@ -11,18 +11,13 @@ COLUMNS = {
 	"J" => 9
 }
 
-SHIPS = {
-	4 => 1,
-	3 => 2,
-	2 => 3,
-	1 => 4
-}
-
 class Board
 
 	def initialize player
 		@player = player
 		@empty_board = Array.new(10) { Array.new(10, "") }
+		@standard_ships = [4,3,3,2,2,2,1,1,1,1]
+		@ships = 0
 	end
 
 	def owner
@@ -51,35 +46,68 @@ class Board
 		self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
 	end
 
+	def ship_size
+		@standard_ships.pop.to_i
+	end
+
+	# def next_coordinate(x,y,hor_ver)
+	# 	add_horizontal_ship(x,y)
+	# end
+
 	def add_ships
-		ships = 0
-		until ships == 10 do
-			add_horizontal_ship(rand(9),rand(9),rand(1..4))
-			ships += 1
-			add_vertical_ship(rand(9),rand(9),rand(1..4))
-			ships += 1
+		until @ships >= 10 do
+			add_horizontal_ship(rand(9),rand(9),ship_size)
+			add_vertical_ship(rand(9),rand(9),ship_size)
 		end
-		ships
+		@ships
 	end
 
 	def add_horizontal_ship(x,y,size)
 		i = 0
-		x = 9 - size if x + size >= 9
-		while i < size do
-			rows[y][x] = "s"
-			i += 1
-			x += 1
+		x = 9 - size if x + size >= 9 # making sure ship does not go over board edge
+		if rows[y][x] == "" && @ships < 10
+			while i < size do
+				rows[y][x] = "s"
+				i += 1; x += 1
+			end
+			@ships += 1
 		end
 	end
 
 	def add_vertical_ship(x,y,size)
 		i = 0
 		y = 9 - size if y + size >= 9
-		while i < size do
-			rows[y][x] = "s"
-			i += 1
-			y += 1
+		if rows[y][x] == "" && @ships < 10
+			while i < size do
+				rows[y][x] = "s"
+				i += 1; y += 1
+			end
+			@ships += 1
 		end
 	end
+
+	# def check_x_space(x,y,size)
+	# 	i = 0
+	# 	is_there_space = false
+	# 	while i < size do
+	# 		rows[y][x] == "" ? is_there_space = true : is_there_space = false
+	# 		break if is_there_space == false
+	# 		i += 1; x += 1
+	# 	end
+	# 	is_there_space
+	# end
+
+	# def check_y_space(x,y,size)
+	# 	i = 0
+	# 	is_there_space = false
+	# 	while i < size do
+	# 		rows[y][x] == "" ? is_there_space = true : is_there_space = false
+	# 		break if is_there_space == false
+	# 		i += 1; y += 1
+	# 	end
+	# 	is_there_space
+	# end
+
+
 
 end
