@@ -15,6 +15,7 @@ class Board
 
 	def initialize player
 		@player = player
+		@empty_board = Array.new(10) { Array.new(10, "") }
 	end
 
 	def owner
@@ -32,14 +33,22 @@ class Board
 	def register_shot at_coordinates
 		x = COLUMNS[at_coordinates[0]]
 		y = at_coordinates[1].to_i - 1
-		self.rows[x][y] == "s" ? (change_to_x(x,y); "x") : (change_to_o(x,y); "o")
+		rows[x][y] == "s" ? (change_to_x(x,y); "x") : (change_to_o(x,y); "o")
 	end
 
 	def rows # creates boards for both player and opponent	
-		Array.new(10,  Array.new(10, "") )
+		@empty_board
 	end
 
 	def opponent_view
 		self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
 	end
+
+	def add_ship(y,x,size)
+		while x < size do
+			rows[y][x] = "s"
+			x += 1
+		end
+	end
+
 end

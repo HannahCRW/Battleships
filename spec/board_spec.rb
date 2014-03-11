@@ -29,4 +29,17 @@ describe Board do
 		board.stub(:rows) { [["","o","s"],["s","","x"],["o","","s"]] }
 		expect(board.opponent_view).to eq([["","o",""],["","","x"],["o","",""]])
 	end
+
+	context 'Ships' do 
+
+		it "should contain one ship of four" do
+			board.rows
+			board.add_ship(0,0,4)
+			s_count = 0
+			board.rows.each{|row| s_count += row.count("s")}
+			expect(s_count).to eq(4)
+
+		end
+
+	end
 end
