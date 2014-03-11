@@ -11,6 +11,13 @@ COLUMNS = {
 	"J" => 9
 }
 
+SHIPS = {
+	4 => 1,
+	3 => 2,
+	2 => 3,
+	1 => 4
+}
+
 class Board
 
 	def initialize player
@@ -44,8 +51,20 @@ class Board
 		self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
 	end
 
+	def add_ships
+		ships = 0
+		until ships == 10 do
+			add_horizontal_ship(rand(9),rand(9),rand(1..4))
+			ships += 1
+			add_vertical_ship(rand(9),rand(9),rand(1..4))
+			ships += 1
+		end
+		ships
+	end
+
 	def add_horizontal_ship(x,y,size)
 		i = 0
+		x = 9 - size if x + size >= 9
 		while i < size do
 			rows[y][x] = "s"
 			i += 1
@@ -55,6 +74,7 @@ class Board
 
 	def add_vertical_ship(x,y,size)
 		i = 0
+		y = 9 - size if y + size >= 9
 		while i < size do
 			rows[y][x] = "s"
 			i += 1
