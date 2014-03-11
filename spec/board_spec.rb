@@ -32,13 +32,20 @@ describe Board do
 
 	context 'Ships' do 
 
-		it "should contain one ship of four" do
+		it "should contain one horizontal ship of four" do
 			board.rows
-			board.add_ship(0,0,4)
+			board.add_horizontal_ship(0,0,4)
 			s_count = 0
 			board.rows.each{|row| s_count += row.count("s")}
 			expect(s_count).to eq(4)
+		end
 
+		it "should contain one vertical ship of three" do
+			board.rows
+			board.add_vertical_ship(5,1,3)
+			s_count = 0
+			board.rows.each{|row| s_count += row.count("s")}
+			expect(s_count).to eq(3)
 		end
 
 	end

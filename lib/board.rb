@@ -44,10 +44,21 @@ class Board
 		self.rows.map { |row| row.map { |element| element == "s" ? "" : element }}
 	end
 
-	def add_ship(y,x,size)
-		while x < size do
+	def add_horizontal_ship(x,y,size)
+		i = 0
+		while i < size do
 			rows[y][x] = "s"
+			i += 1
 			x += 1
+		end
+	end
+
+	def add_vertical_ship(x,y,size)
+		i = 0
+		while i < size do
+			rows[y][x] = "s"
+			i += 1
+			y += 1
 		end
 	end
 
