@@ -37,23 +37,29 @@ describe Board do
 		end
 
 		it "should contain one horizontal ship of four" do
-			board.add_horizontal_ship(0,0,4)
 			s_count = 0
+			board.add_horizontal_ship(0,0,4)
 			board.rows.each{|row| s_count += row.count("s")}
 			expect(s_count).to eq(4)
 		end
 
 		it "should contain one vertical ship of three" do
-			board.add_vertical_ship(5,1,3)
 			s_count = 0
+			board.add_vertical_ship(5,1,3)
 			board.rows.each{|row| s_count += row.count("s")}
 			expect(s_count).to eq(3)
 		end
 
-		it "should be able to plot ten ships" do
+		it "should be able to plot ten ships on the board (within designated space)" do
 			board.add_ships
 			expect(board.add_ships).to eq(10)
-			p board.rows
+		end
+
+		it "should not overlap the ships" do
+			s_count = 0
+			board.add_ships
+			board.rows.each{|row| s_count += row.count("s")}
+			expect(s_count).to eq(20)
 		end
 
 	end
