@@ -47,7 +47,9 @@ class Board
 	end
 
 	def ship_size
-		@standard_ships.pop.to_i
+		size = @standard_ships.pop.to_i
+		puts size
+		size
 	end
 
 	# def next_coordinate(x,y,hor_ver)
@@ -55,58 +57,73 @@ class Board
 	# end
 
 	def add_ships
-		until @ships >= 10 do
-			add_horizontal_ship(rand(9),rand(9),ship_size)
-			add_vertical_ship(rand(9),rand(9),ship_size)
+		while @ships < 10 do
+			add_horizontal_ship(rand(9),rand(9),ship_size) 
+			add_vertical_ship(rand(9),rand(9),ship_size) if @ships < 10
 		end
+		p rows
 		@ships
 	end
 
 	def add_horizontal_ship(x,y,size)
+		return if !check_x_space(x,y,size)
+		
 		i = 0
-		x = 9 - size if x + size >= 9 # making sure ship does not go over board edge
-		if rows[y][x] == "" && @ships < 10
-			while i < size do
-				rows[y][x] = "s"
-				i += 1; x += 1
-			end
-			@ships += 1
+		while i < size do
+			# puts ">>>#{rows[y][x]}<<<" 
+			rows[y][x] = "s"
+			i += 1; x += 1
 		end
+		@ships += 1	
 	end
 
 	def add_vertical_ship(x,y,size)
+		return if !check_y_space(x,y,size)
+
 		i = 0
-		y = 9 - size if y + size >= 9
-		if rows[y][x] == "" && @ships < 10
-			while i < size do
-				rows[y][x] = "s"
-				i += 1; y += 1
-			end
-			@ships += 1
+		while i < size do
+			rows[y][x] = "s"
+			i += 1; y += 1
 		end
+		@ships += 1		
+
+		# i = 0
+		# p check_y_space(x,y,size)
+		# if check_y_space(x,y,size)
+		# 	@ships += 1
+		# 	while i < size do
+		# 		rows[y][x] = "s"
+		# 		i += 1; y += 1
+		# 	end
+		# end
+
 	end
 
-	# def check_x_space(x,y,size)
-	# 	i = 0
-	# 	is_there_space = false
-	# 	while i < size do
-	# 		rows[y][x] == "" ? is_there_space = true : is_there_space = false
-	# 		break if is_there_space == false
-	# 		i += 1; x += 1
-	# 	end
-	# 	is_there_space
-	# end
+	def check_x_space(x,y,size)
+		i = 0
+		while i < size do
+			if y >= rows.length || x >= rows[y].length || rows[y][x] != ""
 
-	# def check_y_space(x,y,size)
-	# 	i = 0
-	# 	is_there_space = false
-	# 	while i < size do
-	# 		rows[y][x] == "" ? is_there_space = true : is_there_space = false
-	# 		break if is_there_space == false
-	# 		i += 1; y += 1
-	# 	end
-	# 	is_there_space
-	# end
+				@standard_ships << size
+				puts "not space pushing back on #{@standard_ships}"
+				return false
+			end 
+			i += 1; x += 1
+		end
+		true
+	end
+
+	def check_y_space(x,y,size)
+		i = 0
+		while i < size do
+			if y >= rows.length || rows[y][x] != "" 
+				@standard_ships << size
+				return false
+			end 
+			i += 1; y += 1
+		end
+		true
+	end
 
 
 
