@@ -62,5 +62,16 @@ describe Board do
 			expect(s_count).to eq(20)
 		end
 
+
+		it "checks space for ships" do
+			expect(board.check_x_space(0,0,10)).to eq(true)
+			expect(board.check_x_space(1,0,10)).to eq(false)
+			expect(board.check_x_space(1,11,10)).to eq(false)
+			expect(board.check_y_space(0,0,10)).to eq(true)
+			expect(board.check_y_space(0,1,10)).to eq(false)
+			expect(board.check_y_space(11,0,10)).to eq(false)
+
+		end
+
 	end
 end
